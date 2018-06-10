@@ -25,6 +25,8 @@ hexchat.hook_server_attrs('PRIVMSG', function (word, word_eol, attrs)
 		emit('Join', nick, channel, host)
 	elseif is_event('quit with message') then
 		emit('Quit', nick, strip_brackets(word_eol[8]), host)
+	elseif is_event('quit:') then
+		emit('Quit', nick, word_eol[6], host)
 	elseif is_event('parted with message') then
 		local reason = strip_brackets(word_eol[8])
 		if reason ~= '' then
